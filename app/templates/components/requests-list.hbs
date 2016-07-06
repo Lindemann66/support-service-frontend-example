@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <caption>{{caption}}</caption>
+    <thead>
+      <tr>
+        <th>Text</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each requests as |request|}}
+        <tr class={{class}}>
+          <td>{{request.text}}</td>
+          <td>{{request.humanStatus}}</td>
+          <td>
+            {{#unless isCustomer}}
+              <button type="button" class="btn btn-default" disabled={{disabled}} {{action "markAsFixed" request.id}}>Mark as fixed</button>
+              <button type="button" class="btn btn-default" disabled={{disabled}} {{action "markAsDenied" request.id}}>Deny</button>
+              <button type="button" class="btn btn-default" {{action "exportToPdf" request.id}}>Export to PDF</button>
+            {{/unless}}
+
+            {{#if isAdmin}}
+              <button type="button" class="btn btn-default" {{action "delete" request.id}}>Remove</button>
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody> 
+  </table>
+</div>

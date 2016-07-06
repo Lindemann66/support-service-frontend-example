@@ -7,6 +7,7 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
+      ENABLE_DS_FILTER: true,
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
@@ -20,11 +21,9 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.contentSecurityPolicy = {
+      'connect-src': "'self' 'http://127.0.0.1:3000'"
+    }
   }
 
   if (environment === 'test') {

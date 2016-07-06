@@ -1,0 +1,49 @@
+{{outlet}}
+{{navigation-menu isCustomer=isCustomer user=currentUser}}
+
+<div class="container-fluid">
+  <div class="panel panel-default">
+    <div class="panel-heading">Manage requests</div>
+    <div class="panel-body">
+  
+      {{#unless isCustomer}}
+        {{search-form}}
+      {{/unless}}
+
+      <br />
+
+      {{#unless isSupport}}
+        {{create-request-form requestAdded=(action "requestAdded")}}
+      {{/unless}}
+
+      <br />
+
+      {{#if pendingRequests}}
+        {{requests-list requests=pendingRequests caption="Pending requests" class="" isCustomer=isCustomer isAdmin=isAdmin}}
+      {{/if}}
+
+      {{#if fixedRequests}}
+        {{requests-list requests=fixedRequests caption="Fixed requests" class="success" disabled="true" isCustomer=isCustomer isAdmin=isAdmin}}
+      {{/if}}
+
+      {{#if deniedRequests}}
+        {{requests-list requests=deniedRequests caption="Denied requests" class="danger" disabled="true" isCustomer=isCustomer isAdmin=isAdmin}}
+      {{/if}}
+    </div>
+  </div>
+
+  {{#if isAdmin}}
+    <div class="panel panel-default">
+      <div class="panel-heading">Manage users</div>
+      <div class="panel-body">
+        {{create-user-form userAdded=(action "userAdded") customerRoleId=customerRoleId supportRoleId=supportRoleId adminRoleId=adminRoleId}}
+
+        <br />
+
+        {{#if users}}
+          {{users-list users=users}}
+        {{/if}}
+      </div>
+    </div>
+  {{/if}}
+</div>

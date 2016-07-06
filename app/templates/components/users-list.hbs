@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each users as |user|}}
+        <tr>
+          <td>{{user.email}}</td>
+          <td>{{user.humanRole}}</td>
+          <td>
+            <button type="button" class="btn btn-default" {{action "deleteUser" user.id}}>Remove</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody> 
+  </table>
+</div>
